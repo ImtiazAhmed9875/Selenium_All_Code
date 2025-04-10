@@ -1,10 +1,7 @@
 package org.example;
 
 import org.checkerframework.checker.units.qual.A;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
@@ -184,6 +181,7 @@ public void IntWithWindow(){
 
 
 }
+
 public void IntWithHoverOverElements(){
         driver.get("https://the-internet.herokuapp.com/hovers");
         Actions actions = new Actions(driver);
@@ -196,6 +194,111 @@ public void IntWithHoverOverElements(){
     }
     WebDriver user1 = driver;
     System.out.println("Hover over element of: "+ user1.findElement(By.xpath("//h5[text()=\"name: user1\"]")).getText());
+}
+public void scrollPage (){
+    System.out.println("Scroll page");
+    driver.get("https://www.selenium.dev/documentation/en/");
+    JavascriptExecutor js  =(JavascriptExecutor)driver;
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    js.executeScript("window.scrollBy(0,500);", new Object[0]);
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    js.executeScript("window.scrollBy(0,-500);",new Object[0]);
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    js.executeScript("window.scrollTo(0,document.body.scrollHeight);",new Object[0]);
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    js.executeScript("window.scrollTo(0,document.body.scrollHeight/2);",new Object[0]);
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    js.executeScript("window.scrollTo(0,0);",new Object[0]);
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    WebElement con = driver.findElement(By.xpath("//*[@id=\"dev-partners\"]"));
+   ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", new Object[]{con});
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    ((JavascriptExecutor)driver).executeScript("arguments[0].style.border='3px solid red'", new Object[]{con});
+    try {
+        Thread.sleep(2000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+
+}
+
+public void handlespcalkeys(){
+        driver.get("https://the-internet.herokuapp.com/key_presses");
+        WebElement input = driver.findElement(By.xpath("//input[@id=\"target\"]"));
+        input.sendKeys("Test by Imtiaz");
+    try {
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    input.sendKeys((Keys.COMMAND)+"a");
+
+    try {
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    input.sendKeys(new CharSequence[]{Keys.ENTER});
+    try {
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+
+}
+public void uploadFile(){
+    System.out.println("Upload file");
+    driver.get("https://the-internet.herokuapp.com/upload");
+    WebElement inputFile = driver.findElement(By.xpath("//input[@id=\"file-upload\"]"));
+    try {
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    inputFile.sendKeys("/Users/imtiazahmed/Downloads/pexels-sebastiaan9977-1097456.jpg");
+    try {
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+    WebElement button = driver.findElement(By.xpath("//input[@class=\"button\"]"));
+    button.click();
+    try {
+        Thread.sleep(3000);
+    } catch (InterruptedException e) {
+        throw new RuntimeException(e);
+    }
+}
+public void captureScreenshot(){
+
 }
 
 
@@ -212,7 +315,10 @@ public void IntWithHoverOverElements(){
 //            f1.IntWithFrame();
 //            f1.IntWithAlarts();
 //            f1.IntWithWindow();
-            f1.IntWithHoverOverElements();
+//            f1.IntWithHoverOverElements();
+//            f1.scrollPage();
+//            f1.handlespcalkeys();
+            f1.uploadFile();
 
 
         }finally {
